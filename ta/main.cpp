@@ -22,7 +22,7 @@ const char* BULLET_PATH = "./resources/bullet.png";
 SDL_Window* window = NULL;
 SDL_Renderer* renderer = NULL;
 
-SDL_Point point = { 14,23 };
+SDL_Point point = { 14,27 };
 SDL_Point wallPoint = { 0,0 };
 Object redTank;
 Object greenTank;
@@ -267,17 +267,17 @@ void CheckForDeath() {
 
 	x1g = greenTank.x;
 	x2g = greenTank.x + 45;
-	y1g = greenTank.y;
+	y1g = greenTank.y - 25;
 	y2g = greenTank.y + 45;
 	x1r = redTank.x;
 	x2r = redTank.x + 45;
-	y1r = redTank.y;
+	y1r = redTank.y - 25;
 	y2r = redTank.y + 45;
 
 	for (int i = 0; i < ind; i++) {
 		if (bullets[i] != NULL) {
-			xb = bullets[i]->rect.x + 4;
-			yb = bullets[i]->rect.y + 4;
+			xb = bullets[i]->x + 4;
+			yb = bullets[i]->y + 4;
 			if (xb >= x1g && xb <= x2g && yb >= y1g && yb <= y2g && bullets[i]->rect.h!=7) {
 				gAlive = false;
 			}
