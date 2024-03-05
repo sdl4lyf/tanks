@@ -33,6 +33,8 @@ const double ROTATION_SPEED = 240.0; // deg/s
 const double SPEED = 150.0; // p/s
 const double ROTATION_CLAMP = 5.0;
 const Uint8* states = 0;
+Object bullets[200];
+int ind = 0;
 
 bool quit = false;
 SDL_Event e;
@@ -49,7 +51,7 @@ bool CollisionCheck(Object* object, int** arr);
 double ClampRotation(double angle, double value);
 bool PointSquareCheck(int x1,int y1,int x2,int y2,int px,int py);
 void Line(int x1, int y1, int x2, int y2);
-
+void MoveBullet();
 
 
 long long timeStart = chrono::time_point_cast<chrono::microseconds>(chrono::high_resolution_clock::now()).time_since_epoch().count();
@@ -67,7 +69,8 @@ void Init() {
 
 	wall = Object(LoadTexture(WALL_PATH), 0, 0, 0, 0);
 
-	bullet = Object(LoadTexture(BULLET_PATH), 100.0, 100.0,8, 8);
+	//bullet = Object(LoadTexture(BULLET_PATH), 100.0, 100.0,8, 8);
+	//bullet.rotation = 45;
 
 	maze = new Maze(8, 8);
 }
@@ -100,8 +103,19 @@ void CheckForQuit() {
 					cout << '\n';
 				}
 			}
+			if (e.key.keysym.sym == SDLK_e) {
+                bullets[ind++] = Object(LoadTexture(BULLET_PATH),redTank.x+7,redTank.y+12,8,8,-redTank.rotation);
+			}
 		}
 	}
+}
+
+void MoveBullet(){
+    if(ind ==0)return;
+    for(int i =0;i<ind;i++){
+        bullets[i].IncrementY(sin(3.14159265359 / 180.0 * ((bullets[i].projectileAngle - 90.0))) * deltaTime / 1000000.0 * SPEED*1.5);
+        bullets[i].IncrementX(cos(3.14159265359 / 180.0 * ((bullets[i].projectileAngle - 90.0))) * deltaTime / 1000000.0 * SPEED*1.5);
+    }
 }
 
 void RedMovement() {
@@ -227,9 +241,15 @@ void Loop() {
 
 	maze->RenderMaze(renderer, &wall, &wall, &wallPoint);
 	RedMovement();
+	MoveBullet();
 
+	if(ind !=0){
+       for(int i =0;i<ind;i++){
+            Render(bullets[i]);
+       }
+	}
 	Render(redTank);
-	Render(bullet);
+	//Render(bullet);
 }
 
 void Render(Object object) {
