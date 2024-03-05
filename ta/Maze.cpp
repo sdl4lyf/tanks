@@ -71,7 +71,7 @@ void Maze::AddToColList(int x, int y, int w, int h, int angle) { // x1 y1 x2 y2
 		return;
 	}
 
-	if (angle == 90 && h==abs(h)) {
+	if (angle == 90 && h == abs(h)) {
 		x1 = x - h;
 		y1 = y;
 		x2 = x;
@@ -135,16 +135,16 @@ void Maze::RenderMaze(SDL_Renderer* renderer, Object* wall, Object* tile, SDL_Po
 		wall->rect.y = placeHolderY;
 		wall->rect.x = placeHolderX + i * wall->rect.w;
 		//AddToColList(wall->rect.x, wall->rect.y, wall->rect.w, wall->rect.h,0);
-		SDL_RenderCopyEx(renderer, wall->texture, NULL, &wall->rect, 0,point,SDL_FLIP_NONE);
+		SDL_RenderCopyEx(renderer, wall->texture, NULL, &wall->rect, 0, point, SDL_FLIP_NONE);
 	}
 	for (int i = 0; i < sizeX; i++) {
-		wall->rect.y = placeHolderY + sizeY*blockSize+(sizeY)*blockSize*0.1;
+		wall->rect.y = placeHolderY + sizeY * blockSize + (sizeY)*blockSize * 0.1;
 		wall->rect.x = placeHolderX + i * wall->rect.w;
 		//AddToColList(wall->rect.x, wall->rect.y, wall->rect.w, wall->rect.h, 0);
 		SDL_RenderCopyEx(renderer, wall->texture, NULL, &wall->rect, 0, point, SDL_FLIP_NONE);
 	}
 	for (int i = 0; i < sizeY; i++) {
-		wall->rect.y = placeHolderY+wall->rect.w*i;
+		wall->rect.y = placeHolderY + wall->rect.w * i;
 		wall->rect.x = placeHolderX;
 		wall->rect.h = abs(wall->rect.h) * -1;
 		//AddToColList(wall->rect.x, wall->rect.y, wall->rect.w, wall->rect.h, 90);
@@ -158,11 +158,11 @@ void Maze::RenderMaze(SDL_Renderer* renderer, Object* wall, Object* tile, SDL_Po
 		SDL_RenderCopyEx(renderer, wall->texture, NULL, &wall->rect, 90, point, SDL_FLIP_VERTICAL);
 	}
 
-	for (int i = 0; i < sizeX-1; i++) {
+	for (int i = 0; i < sizeX - 1; i++) {
 		for (int k = 0; k < sizeY; k++) {
 			switch (grid[i][k]) {
 			case T:
-				wall->rect.x = placeHolderX + i*(wall->rect.h+blockSize);
+				wall->rect.x = placeHolderX + i * (wall->rect.h + blockSize);
 				wall->rect.y = placeHolderY + k * (wall->rect.h + blockSize);
 				wall->rect.w += wall->rect.h;
 				AddToColList(wall->rect.x, wall->rect.y, wall->rect.w, wall->rect.h, 0);
@@ -180,8 +180,8 @@ void Maze::RenderMaze(SDL_Renderer* renderer, Object* wall, Object* tile, SDL_Po
 				wall->rect.w -= wall->rect.h;
 				break;
 			case B:
-				wall->rect.x = placeHolderX+ (i * (blockSize + wall->rect.h));
-				wall->rect.y = placeHolderY + wall->rect.h + blockSize+ (k * (blockSize + wall->rect.h));
+				wall->rect.x = placeHolderX + (i * (blockSize + wall->rect.h));
+				wall->rect.y = placeHolderY + wall->rect.h + blockSize + (k * (blockSize + wall->rect.h));
 				wall->rect.w += abs(wall->rect.h);
 				AddToColList(wall->rect.x, wall->rect.y, wall->rect.w, wall->rect.h, 0);
 				SDL_RenderCopyEx(renderer, wall->texture, NULL, &wall->rect, 0, point, SDL_FLIP_NONE);

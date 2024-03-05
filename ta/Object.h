@@ -6,7 +6,7 @@ public:
 	double x;
 	double y;
 	SDL_Texture* texture;
-	SDL_Rect rect = {0,0,0,0};
+	SDL_Rect rect = { 0,0,0,0 };
 	double projectileAngle = 0;
 
 
@@ -15,5 +15,4 @@ public:
 	Object(SDL_Texture* Texture, double X, double Y, int w, int h, double ProjectileAngle);
 	void IncrementX(double value);
 	void IncrementY(double value);
-
 };

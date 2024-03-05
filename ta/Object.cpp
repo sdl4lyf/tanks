@@ -21,8 +21,8 @@ Object::Object() {
 	x = 0; y = 0;
 }
 
-Object::Object(SDL_Texture* Texture, double X, double Y, int w, int h, double ProjectileAngle){
-    texture = Texture;
+Object::Object(SDL_Texture* Texture, double X, double Y, int w, int h, double ProjectileAngle) {
+	texture = Texture;
 	rect.x = (int)X;
 	rect.y = (int)Y;
 	rect.w = w;

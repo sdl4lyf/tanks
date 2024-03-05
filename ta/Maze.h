@@ -19,5 +19,5 @@ public:
 	void RenderMaze(SDL_Renderer* renderer, Object* wall, Object* tile, SDL_Point* point);
 	int LargestArea(int(&output)[2][2]);
 
-	void AddToColList(int x,int y,int w, int h,int angle);
+	void AddToColList(int x, int y, int w, int h, int angle);
 };
